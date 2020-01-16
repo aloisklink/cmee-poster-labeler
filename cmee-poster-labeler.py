@@ -43,7 +43,7 @@ def generate_label_page(
     packet = io.BytesIO()
     can = canvas.Canvas(packet, pagesize=A1)
     white = Color(1, 1, 1)
-    generate_label(can, string, Location(inch * 21.39, 1 * inch), Font("customfont", 60), white)
+    generate_label(can, string, Location(inch * 21.55, 0.1 * inch), Font("customfont", 60), white)
     can.save()
     packet.seek(0)
 
@@ -90,7 +90,7 @@ def add_label(input_file: Path, output_dir: Path):
     add_label_to_file(str(input_file), str(new_file), str(number))
 
 def main(input_dir: str, output_dir: str):
-    createTrueTypeFont("OpenSans-Bold.ttf", "customfont")
+    createTrueTypeFont("LSANS.TTF", "customfont")
 
     input_dir = Path(input_dir)
     assert input_dir.is_dir()
