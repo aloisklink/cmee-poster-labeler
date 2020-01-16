@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "cmee-poster-labeler"
+version = "0.1.0"
+description = "Adds a label to a PDF poster for the CMEE Showcase"
+authors = ["Alois Klink <alois.klink@soton.ac.uk>"]
+license = "MIT"
+
+[tool.poetry.dependencies]
+python = "^3.6"
+PyPDF2 = "^1.26.0"
+reportlab = "^3.5.34"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry>=1.0.0"]
+build-backend = "poetry.masonry.api"
