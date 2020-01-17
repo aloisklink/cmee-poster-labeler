@@ -43,7 +43,14 @@ def generate_label_page(
     packet = io.BytesIO()
     can = canvas.Canvas(packet, pagesize=A1)
     white = Color(1, 1, 1)
-    generate_label(can, string, Location(inch * 21.55, 0.1 * inch), Font("customfont", 60), white)
+    generate_label(
+        canvas=can,
+        string=string,
+        # can change the x and y position here of the text
+        location=Location(inch * 21.55, 0.1 * inch),
+        font=Font("customfont", 60),
+        color=white,
+    )
     can.save()
     packet.seek(0)
 
@@ -84,12 +91,15 @@ def add_label(input_file: Path, output_dir: Path):
     match = re.search(r"^([TEFWI]\d{2}).*\.pdf$", input_file.name)
     if match == None:
         raise Exception(
-            f"Could not find file number in filename {input_file}."
-            "It must start with a letter and two numbers, e.g. W21-somthing.pdf")
+            f"Could not find file number in filename {input_file}. "
+            "It must start with an uppercase T, E, F, W, or I, "
+            "and two numbers, e.g. W21-somthing.pdf")
     number = match.group(1)
     add_label_to_file(str(input_file), str(new_file), str(number))
 
 def main(input_dir: str, output_dir: str):
+    # this searches for the LSANS.TTF font file, in the current dir,
+    # then the OS default dirs
     createTrueTypeFont("LSANS.TTF", "customfont")
 
     input_dir = Path(input_dir)
